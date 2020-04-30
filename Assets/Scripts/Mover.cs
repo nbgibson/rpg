@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class Mover : MonoBehaviour
 {
     [SerializeField] Transform target;
+
+    Ray lastRay;
     
     // Start is called before the first frame update
     void Start()
@@ -17,5 +19,9 @@ public class Mover : MonoBehaviour
     void Update()
     {
         GetComponent<NavMeshAgent>().destination = target.position;
+        if(Input.GetMouseButtonDown(0)){
+            lastRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        }
+        Debug.DrawRay(lastRay.origin, lastRay.direction * 100);
     }
 }
